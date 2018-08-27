@@ -1,0 +1,25 @@
+<mat-card class="center">
+    <form #loginForm="ngForm" class="form" (ngSubmit)="login(loginForm)">
+            <mat-list>
+                    <mat-form-field class="width-full">
+                            <input matInput type="text" id="user" placeholder="Usuario" class="full-width" name="user" ngModel required>
+                    </mat-form-field>
+                    <mat-form-field class="width-full">
+                            <input matInput type="password" id="pass" placeholder="Contraseña" class="full-width" name="pass" ngModel required>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="width-full">
+                            <mat-select placeholder="Roles" id="rol" name="role" ngModel required>
+                            <mat-option value="1" selected>Mayorista</mat-option>
+                            <mat-option value="2">Minorista</mat-option>
+                            </mat-select>
+                    </mat-form-field>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <button class="margin-auto" mat-raised-button color="primary" *ngIf="!formSubmited">Login</button>
+                        <mat-spinner class="margin-auto" *ngIf="formSubmited"></mat-spinner>
+                    </mat-list-item>
+                    
+            </mat-list>
+    </form>
+</mat-card>

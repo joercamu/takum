@@ -1,0 +1,21 @@
+.width-full{
+    width: 100%;
+}
+.center{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+.margin-auto{
+    margin: auto;
+}
+/* Portrait and Landscape */
+@media screen 
+  and (device-width: 320px) 
+  and (device-height: 640px) 
+  and (-webkit-device-pixel-ratio: 2) {
+    .center{
+        width: 100%;
+    }
+
+}
