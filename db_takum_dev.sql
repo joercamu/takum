@@ -82,10 +82,13 @@ CREATE TABLE `products` (
   `category_id` bigint(20) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
+  `role_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `index_products_on_category_id` (`category_id`),
+  KEY `index_products_on_role_id` (`role_id`),
+  CONSTRAINT `fk_rails_6375c18035` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
   CONSTRAINT `fk_rails_fb915499a4` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -94,6 +97,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'Aguardiente blanco','blanco del valle 500ml',10000,1,'2018-08-27 04:22:56','2018-08-27 04:39:44',1),(2,'Carne lomo de cerdo','lomo de cerdo',5500,2,'2018-08-27 04:23:27','2018-08-27 04:39:44',1),(3,'Carne de cerdo','tocino',5300,2,'2018-08-27 04:24:05','2018-08-27 04:45:10',2),(4,'Carne de res','ganado antioquia',12300,2,'2018-08-27 04:24:39','2018-08-27 04:39:45',1),(5,'Pechuga campesina','pechuga de pollo campesina',5400,2,'2018-08-27 04:25:06','2018-08-27 04:39:45',1),(6,'Cerveza poker','cerveza 330ml',2300,1,'2018-08-27 04:25:41','2018-08-27 04:44:56',2),(7,'Ron viejo de caldas','ron de caldas',25000,1,'2018-08-27 04:26:06','2018-08-27 04:39:45',1),(8,'leche colanta','1000ml',2300,3,'2018-08-27 04:27:05','2018-08-27 04:39:45',1),(9,'alpinito','niños',2500,3,'2018-08-27 04:27:26','2018-08-27 04:39:45',1),(10,'Yogourt ','zucaritas',3400,3,'2018-08-27 04:28:51','2018-08-27 04:45:20',2);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +146,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20180826191923'),('20180826193946'),('20180826205829'),('20180827025132'),('20180827025227');
+INSERT INTO `schema_migrations` VALUES ('20180826191923'),('20180826193946'),('20180826205829'),('20180827025132'),('20180827025227'),('20180827042936');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +168,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `index_users_on_role_id` (`role_id`),
   CONSTRAINT `fk_rails_642f17018b` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +177,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Jonathan Cardenas','jcardenas','81dc9bdb52d04dc20036dbd8313ed055',1,'2018-08-26 20:06:32','2018-08-26 20:06:32');
+INSERT INTO `users` VALUES (1,'Jonathan Cardenas','jcardenas','81dc9bdb52d04dc20036dbd8313ed055',1,'2018-08-26 20:06:32','2018-08-26 20:06:32'),(2,'Simon parra','sparra','e10adc3949ba59abbe56e057f20f883e',2,'2018-08-27 04:49:09','2018-08-27 04:49:09');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -186,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-08-27  3:19:15
+-- Dump completed on 2018-08-27  4:49:24
