@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_27_025227) do
+ActiveRecord::Schema.define(version: 2018_08_27_042936) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -25,7 +25,9 @@ ActiveRecord::Schema.define(version: 2018_08_27_025227) do
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "role_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["role_id"], name: "index_products_on_role_id"
   end
 
   create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -45,5 +47,6 @@ ActiveRecord::Schema.define(version: 2018_08_27_025227) do
   end
 
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "roles"
   add_foreign_key "users", "roles"
 end

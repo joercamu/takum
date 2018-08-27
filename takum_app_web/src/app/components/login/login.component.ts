@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Md5 } from 'ts-md5/dist/md5';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { LoginService } from '../../login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,22 +13,21 @@ export class LoginComponent implements OnInit {
   
   formSubmited = false;
   datalogin: any; 
-  constructor(private http: Http, private router: Router, public snackBar: MatSnackBar) { }
+  constructor(private loginService: LoginService, private router: Router, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
 
   login(form: NgForm){
-    let md5 = new Md5();
     if(form.value.user != "" && form.value.pass != "" && form.value.role != ""){
       this.formSubmited = true;
-      this.http.get(`http://localhost:3333/users/validate/${form.value.user}/${md5.appendAsciiStr(form.value.pass).end()}/1.json`)
+      this.loginService.validate(form.value.user,form.value.pass, form.value.role )
       .subscribe((data: any)=>{
         if(data.status == 200){
           this.datalogin = JSON.parse(data._body);
           localStorage.setItem('user', this.datalogin.user);
           localStorage.setItem('role', this.datalogin.role);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/inicio']);
         }else{
           this.snackBar.open("Uppss las credenciales proporcionadas no son correctas...");
           this.formSubmited = false;

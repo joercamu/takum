@@ -14,26 +14,29 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
-
-
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { CategoriesComponent } from './components/categories/categories.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductsComponent } from './products/products.component';
+
 import { LoginGuard } from './login.guard';
+import { NologinGuard } from './nologin.guard';
+
+import { LoginService } from './login.service';
+
+
 
 
 const ROUTES: Routes = [
-  {path: '', redirectTo: '/home', pathMatch: 'full' },
-  {path: 'login', component: LoginComponent},
-  {path: 'home', component: HomeComponent, canActivate: [LoginGuard]},
-  {path: 'categories', component: CategoriesComponent, canActivate: [LoginGuard]},
-  {path: '**', redirectTo: '/home'}
+  {path: '', redirectTo: '/inicio', pathMatch: 'full' },
+  {path: 'entrar', component: LoginComponent, canActivate: [NologinGuard]},
+  {path: 'inicio', component: HomeComponent, canActivate: [LoginGuard]},
+  {path: 'categorias', component: CategoriesComponent, canActivate: [LoginGuard]},
+  {path: 'productos', component: ProductsComponent, canActivate: [LoginGuard]},
+  {path: '**', redirectTo: '/inicio'}
 ];
 
 @NgModule({
@@ -41,7 +44,8 @@ const ROUTES: Routes = [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    ProductsComponent
   ],
   imports: [
     MatInputModule, MatButtonModule, MatSelectModule, MatProgressSpinnerModule, MatGridListModule, MatCardModule, MatDividerModule, MatListModule, MatToolbarModule, MatSnackBarModule,
@@ -51,7 +55,7 @@ const ROUTES: Routes = [
     BrowserAnimationsModule,
     HttpModule
   ],
-  providers: [LoginGuard],
+  providers: [LoginService,LoginGuard, NologinGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
